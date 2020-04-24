@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AxiosWithAuth from '../utils/AxiosWithAuth';
-import axiosWithAuth from '../utils/AxiosWithAuth';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const initialState = {
 	username: '',
@@ -23,14 +22,14 @@ const Login = (props) => {
 			.post('/api/login', login)
 			.then((res) => {
 				localStorage.setItem('token', res.data);
-				props.history.push('bubble-page');
+				props.history.push('/bubble-page');
 			})
-			.catch((err) => console.log('Error logging in', err));
+			.catch((err) => console.log('Error logging you in', err));
 	};
 
 	return (
 		<div>
-			<h1>I'm forever blowing bubbles, Pretty bubbles in the air</h1>
+			<h1>"I'm forever blowing bubbles, Pretty bubbles in the air"</h1>
 			<hr />
 			<h3>Login</h3>
 			<div>
