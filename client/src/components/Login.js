@@ -21,7 +21,8 @@ const Login = (props) => {
 		axiosWithAuth()
 			.post('/api/login', login)
 			.then((res) => {
-				localStorage.setItem('token', res.data);
+				console.log(res);
+				localStorage.setItem('token', res.data.payload);
 				props.history.push('/bubble-page');
 			})
 			.catch((err) => console.log('Error logging you in', err));

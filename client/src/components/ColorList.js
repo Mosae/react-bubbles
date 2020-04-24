@@ -9,7 +9,6 @@ const initialColor = {
 
 const ColorList = ({ colors, updateColors }) => {
 	console.log(colors);
-	const [newColor, setNewColor] = useState(initialColor);
 	const [editing, setEditing] = useState(false);
 	const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -24,15 +23,15 @@ const ColorList = ({ colors, updateColors }) => {
 		// think about where will you get the id from...
 		// where is is saved right now?
 		axiosWithAuth()
-			.put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+			.put(`/api/colors/${colorToEdit.id}`, colorToEdit)
 			.then((res) => {
-				const NewColors = colors.map((color) => {
+				const newColors = colors.map((color) => {
 					if (color.id === colorToEdit.id) {
 						return res.data;
 					}
 					return color;
 				});
-				updateColors(NewColors);
+				updateColors(newColors);
 			})
 			.catch((err) => console.log('editing error', err));
 	};
@@ -40,7 +39,7 @@ const ColorList = ({ colors, updateColors }) => {
 	const deleteColor = (color) => {
 		// make a delete request to delete this color
 		axiosWithAuth()
-			.delete(`http://localhost:5000/api/colors/${color.id}`, color)
+			.delete(`/api/colors/${color.id}`, color)
 			.then((res) => {
 				console.log('response from .delete', res);
 			})
